@@ -7,17 +7,31 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::get();
-        return view('product/index', [
-            'products' => $products,
-        ]);
+        $sort = \Request::get('sort');
+
+        $products = Product::where([
+            [function ($query) use ($request) {
+                if (($src = $request->src)) {
+                    $query->orWhere('name','like','%'.$src.'%')->get();
+                }
+            }]
+        ])->paginate(10);
+
+        if ($sort == 1) {
+            $products = $products->sortBy('price');
+        }else if ($sort == 2) {
+            $products = $products->sortByDesc('price');
+        }
+
+        return view('product/index', compact('products'));
     }
 
     /**
@@ -87,9 +101,7 @@ class ProductController extends Controller
             'image' => '',
             'available' => '',
         ]);
-            
         $product->update($data);
-
     }
 
     /**
@@ -102,5 +114,10 @@ class ProductController extends Controller
     {
         $product->delete();
         return redirect('/product/index');
+    }
+
+    public function scopeSearch($q)
+    {
+        return empty(request()->search) ? $q : $q->where('name', 'like', '%'.request()->search.'%');
     }
 }
