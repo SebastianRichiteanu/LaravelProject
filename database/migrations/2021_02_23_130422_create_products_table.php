@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->float('price');
             $table->string('description');
-            $table->boolean('available');
+            $table->boolean('available')->nullable();
             $table->string('image');
         });
     }
