@@ -16,24 +16,13 @@ class ProductsController extends Controller
     public function index(Request $request)
     {
         $sort = \Request::get('sort');
-
-        $products = Product::where([
-            [function ($query) use ($request) {
-                if (($src = $request->src)) {
-                    $query->orWhere('name','like','%'.$src.'%')->get();
-                }
-            }]
-        ])->paginate(10);
-
+        $products = Product::where('available','=','true')->get();
         if ($sort == 1) {
             $products = $products->sortBy('price');
         }else if ($sort == 2) {
             $products = $products->sortByDesc('price');
         }
-
         $products = $products->toJson();
-       // dd($products);
-       // dd(json_decode($products)->data);
         return view('products/index', compact('products'));
     }
 
@@ -111,8 +100,12 @@ class ProductsController extends Controller
             'price' => 'required',
             'description' => 'required',
             'image' => '',
-            'available' => '',
+            'available' => 'required',
         ]);
+        if (array_key_exists('image',$data)) {
+            $imgPath = request('image')->store('uploads', 'public');
+            $data['image'] = $imgPath;
+        }
         $product->update($data);
         return redirect('/products/index');
     }
@@ -129,8 +122,5 @@ class ProductsController extends Controller
         return redirect('/products/index');
     }
 
-    public function scopeSearch($q)
-    {
-        return empty(request()->search) ? $q : $q->where('name', 'like', '%'.request()->search.'%');
-    }
+    
 }

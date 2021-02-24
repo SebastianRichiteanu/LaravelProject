@@ -36,15 +36,46 @@ window.search = function() {
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById('src_bar');
     filter = input.value.toUpperCase();
-    ul = document.getElementById("prod_ul");
-    li = ul.getElementsByTagName('li');
-    for (i = 0; i < li.length; i++) {
-        p = li[i].getElementsByTagName("p")[0];
-        txtValue = p.textContent || p.innerText;
+    ul = document.getElementById("products");
+    li = ul.getElementsByTagName("a");
+    for (i = 0; i < li.length; ++i) {
+        a = li[i].getElementsByClassName("product-name")[0];
+        txtValue = a.textContent || a.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
             li[i].style.display = "";
         } else {
             li[i].style.display = "none";
         }
+    }
+}
+
+window.sort = function() {
+    function comp(a,b,mode) {
+        if (mode == 1) 
+            return a>b;
+        else
+            return a<b;
+    }
+    
+    var list, i, switching, b, shouldSwitch, mode;
+    mode = document.getElementById("sort").value;
+    list = document.getElementById("products");
+    switching = true;
+    while (switching) {
+        switching = false;
+        b = list.getElementsByTagName("a");
+        for (i = 0; i < (b.length - 1); i++) {
+            shouldSwitch = false;
+            bi = Number(b[i].getElementsByClassName("product-description")[0].children[0].innerText);
+            bj = Number(b[i+1].getElementsByClassName("product-description")[0].children[0].innerText);
+            if (comp(bi,bj,mode)) {
+                shouldSwitch = true;
+            break;
+            }
+        }
+    if (shouldSwitch) {
+        b[i].parentNode.insertBefore(b[i + 1], b[i]);
+        switching = true;
+    }
     }
 }

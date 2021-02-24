@@ -32,7 +32,7 @@
         <div class="form-group row">
             <label for="price" class="col-md-4 col-form-label text-md-right">Product Price</label>
             <div class="col-md-6">
-                <input id="price" type="number" name="price" class="form-control @error('price') is-invalid @enderror" required autocomplete="price" autofocus>
+                <input id="price" step="0.01" type="number" name="price" class="form-control @error('price') is-invalid @enderror" required autocomplete="price" autofocus>
                 @error('price')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
