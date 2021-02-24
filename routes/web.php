@@ -14,21 +14,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('/product/index');
+    return redirect('/products/index');
 });
 
 Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/product/index', [App\Http\Controllers\ProductController::class, 'index'])->name('product.index');
+Route::get('/products/index', [App\Http\Controllers\ProductsController::class, 'index'])->name('products.index');
 
-Route::get('/product/create', [App\Http\Controllers\ProductController::class, 'create'])->name('product.create');
-Route::post('/product', [App\Http\Controllers\ProductController::class, 'store'])->name('product.store');
+Route::get('/products/create', [App\Http\Controllers\ProductsController::class, 'create'])->name('products.create');
+Route::post('/products', [App\Http\Controllers\ProductsController::class, 'store'])->name('products.store');
 
-Route::get('/product/{product}', [App\Http\Controllers\ProductController::class, 'show'])->name('product.show');
+Route::get('/products/{product}', [App\Http\Controllers\ProductsController::class, 'show'])->name('products.show');
 
-Route::get('/product/{product}/edit', [App\Http\Controllers\ProductController::class, 'edit'])->name('product.edit');
-Route::patch('/product/{product}', [App\Http\Controllers\ProductController::class, 'update'])->name('product.update');
+Route::get('/products/{product}/edit', [App\Http\Controllers\ProductsController::class, 'edit'])->name('products.edit');
+Route::patch('/products/{product}', [App\Http\Controllers\ProductsController::class, 'update'])->name('products.update');
 
-Route::delete('/product/{product}', [App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy');
+Route::delete('/products/{product}', [App\Http\Controllers\ProductsController::class, 'destroy'])->name('products.destroy');

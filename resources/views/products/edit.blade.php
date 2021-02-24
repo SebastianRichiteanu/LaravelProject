@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <form action="/product/{{$product->id}}" enctype="multipart/form-data" method="post">
+    <form action="/products/{{$product->id}}" enctype="multipart/form-data" method="post">
         @csrf
         @method('PATCH')
         <div class="row">
@@ -35,6 +35,20 @@
             <div class="col-md-6">
                 <input id="price" type="number" name="price" class="form-control @error('price') is-invalid @enderror" value="{{ old('price') ?? $product->price}}" autocomplete="price" autofocus>
                 @error('price')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="available" class="col-md-4 col-form-label text-md-right">Available</label>
+            <div class="col-md-6">
+                <select id="available" name="available" class="form-control @error('available') is-invalid @enderror" value="{{ old('price') ?? $product->price}}" autocomplete="available" autofocus>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+                @error('available')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>

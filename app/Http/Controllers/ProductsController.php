@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class ProductsController extends Controller
 {
 
     /**
@@ -31,7 +31,10 @@ class ProductController extends Controller
             $products = $products->sortByDesc('price');
         }
 
-        return view('product/index', compact('products'));
+        $products = $products->toJson();
+       // dd($products);
+       // dd(json_decode($products)->data);
+        return view('products/index', compact('products'));
     }
 
     /**
@@ -41,7 +44,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product/create');
+        return view('products/create');
     }
 
     /**
@@ -57,10 +60,19 @@ class ProductController extends Controller
             'price' => 'required',
             'description' => 'required',
             'image' => ['required', 'image'],
-            'available' => '',
+            'available' => 'required',
         ]);
-        Product::create($data);
-        return redirect('/product/index');
+        $imgPath = request('image')->store('uploads', 'public');
+
+        Product::create([
+            'name' => $data['name'],
+            'price' => $data['price'],
+            'description' => $data['description'],
+            'image' => $imgPath,
+            'available' => $data['available'],
+        ]);
+
+        return redirect('/products/index');
     }
 
     /**
@@ -71,7 +83,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('product/show', compact('product'));
+        return view('products/show', compact('product'));
     }
 
     /**
@@ -82,7 +94,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('product/edit',compact('product'));
+        return view('products/edit',compact('product'));
     }
 
     /**
@@ -102,6 +114,7 @@ class ProductController extends Controller
             'available' => '',
         ]);
         $product->update($data);
+        return redirect('/products/index');
     }
 
     /**
@@ -113,7 +126,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect('/product/index');
+        return redirect('/products/index');
     }
 
     public function scopeSearch($q)
