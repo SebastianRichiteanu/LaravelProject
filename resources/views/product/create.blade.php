@@ -41,6 +41,20 @@
             </div>
         </div>
         <div class="form-group row">
+            <label for="available" class="col-md-4 col-form-label text-md-right">Available</label>
+            <div class="col-md-6">
+                <select id="available" name="available" class="form-control @error('available') is-invalid @enderror" required autocomplete="available" autofocus>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+                @error('available')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
+        <div class="form-group row">
             <label for="image" class="col-md-4 col-form-label text-md-right">Product Image</label>
             <div class="col-md-6">
                 <input id="image" type="file" class="form-control-file" id="image" name="image">

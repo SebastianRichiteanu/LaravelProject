@@ -31,6 +31,9 @@ class ProductController extends Controller
             $products = $products->sortByDesc('price');
         }
 
+        $products = $products->toJson();
+       // dd($products);
+       // dd(json_decode($products)->data);
         return view('product/index', compact('products'));
     }
 
@@ -57,9 +60,18 @@ class ProductController extends Controller
             'price' => 'required',
             'description' => 'required',
             'image' => ['required', 'image'],
-            'available' => '',
+            'available' => 'required',
         ]);
-        Product::create($data);
+        $imgPath = request('image')->store('uploads', 'public');
+
+        Product::create([
+            'name' => $data['name'],
+            'price' => $data['price'],
+            'description' => $data['description'],
+            'image' => $imgPath,
+            'available' => $data['available'],
+        ]);
+
         return redirect('/product/index');
     }
 
@@ -102,6 +114,7 @@ class ProductController extends Controller
             'available' => '',
         ]);
         $product->update($data);
+        return redirect('/product/index');
     }
 
     /**
