@@ -37,20 +37,33 @@
 
 .product-photo {
     width: 200px;
-    height: 200px;
     padding-top: 10px;
     padding-left: 10px;
     display: flex;
+    
+    img {
+        box-shadow:0 4px 8px;
+    }
 }
 
 .product-info {
-    font-size: x-large;
+    font-size: large;
+
+    ul {
+        list-style-type: none;
+        
+        li:first-child {
+            text-align: center;
+            font-size: xx-large;
+        }
+    }
 }
 
 .product-name {
-    font-size: xx-large;
-    padding-left: 2rem;
+    font-size: xxx-large;
+    text-align: center;
 }
+
 
 
 .card{
@@ -137,5 +150,16 @@
             }
        
         }
+    }
+}
+
+.src_sort {
+    font-size: x-large;
+    input {
+        width: 30%;
+        float: left;
+    }
+    p {
+        float:right;
     }
 }

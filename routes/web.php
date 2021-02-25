@@ -32,3 +32,5 @@ Route::get('/products/{product}/edit', [App\Http\Controllers\ProductsController:
 Route::patch('/products/{product}', [App\Http\Controllers\ProductsController::class, 'update'])->name('products.update');
 
 Route::delete('/products/{product}', [App\Http\Controllers\ProductsController::class, 'destroy'])->name('products.destroy');
+
+Route::resource('/admin/users', App\Http\Controllers\Admin\UsersController::class,['except' => ['show','create','store']]);

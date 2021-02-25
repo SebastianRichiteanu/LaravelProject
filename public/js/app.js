@@ -1939,8 +1939,10 @@ window.sort = function () {
 
     for (i = 0; i < b.length - 1; i++) {
       shouldSwitch = false;
-      bi = Number(b[i].getElementsByClassName("product-description")[0].children[0].innerText);
-      bj = Number(b[i + 1].getElementsByClassName("product-description")[0].children[0].innerText);
+      bi = b[i].getElementsByClassName("product-description")[0].children[0].innerText;
+      bi = Number(bi.substring(0, bi.lastIndexOf("$")));
+      bj = b[i + 1].getElementsByClassName("product-description")[0].children[0].innerText;
+      bj = Number(bj.substring(0, bj.lastIndexOf("$")));
 
       if (comp(bi, bj, mode)) {
         shouldSwitch = true;

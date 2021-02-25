@@ -3,15 +3,21 @@
 
 <div class="container">
     <div class="row pb-5">
-        <img src="https://k.nooncdn.com/cms/pages/20181028/d50dc59bc7f0886dc52e4c6817424ff0/en_mb-banner-01.jpg">
+        <img src="https://seocustomer.com/wp-content/uploads/2020/05/Top-5-Push-Notifications-Templates-For-Ecommerce-Website-banner.jpg">
     </div>
 
-    <input type="text" id="src_bar" onkeyup="window.search()" placeholder="Search..">
-    <select name="sort" id="sort" onchange="window.sort()"> 
-        <option value="0">Default</option>
-        <option value="1">Ascending</option>
-        <option value="2">Descending</option>
-    </select>
+
+    <div class="src_sort">
+        <input type="text" id="src_bar" onkeyup="window.search()" placeholder="Search..">
+        <p>
+            Sort by Price:
+            <select name="sort" id="sort" onchange="window.sort()"> 
+                <option value="0">Default</option>
+                <option value="1">Ascending</option>
+                <option value="2">Descending</option>
+            </select>
+        </p>
+    </div>
 
     <br>
     <br>
@@ -33,7 +39,7 @@
                         {{$product->name}}
                     </div>
                 <ul class="product-description">
-                    <li>{{$product->price}}</li>
+                    <li>{{$product->price}}$</li>
                     <li>{{$product->description}}</li>
                 </ul>
                 </div>

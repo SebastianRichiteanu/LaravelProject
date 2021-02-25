@@ -10973,19 +10973,31 @@ a.text-dark:focus {
 
 .product-photo {
   width: 200px;
-  height: 200px;
   padding-top: 10px;
   padding-left: 10px;
   display: flex;
 }
 
+.product-photo img {
+  box-shadow: 0 4px 8px;
+}
+
 .product-info {
-  font-size: x-large;
+  font-size: large;
+}
+
+.product-info ul {
+  list-style-type: none;
+}
+
+.product-info ul li:first-child {
+  text-align: center;
+  font-size: xx-large;
 }
 
 .product-name {
-  font-size: xx-large;
-  padding-left: 2rem;
+  font-size: xxx-large;
+  text-align: center;
 }
 
 .card {
@@ -11069,6 +11081,19 @@ a.text-dark:focus {
 .card .card__body .btn_admin * {
   align-self: flex-end;
   margin-top: 5px;
+}
+
+.src_sort {
+  font-size: x-large;
+}
+
+.src_sort input {
+  width: 30%;
+  float: left;
+}
+
+.src_sort p {
+  float: right;
 }
 
 
