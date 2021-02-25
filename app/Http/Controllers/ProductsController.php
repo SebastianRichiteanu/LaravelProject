@@ -4,15 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Gate;
 
 class ProductsController extends Controller
 {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $sort = \Request::get('sort');
@@ -26,24 +22,22 @@ class ProductsController extends Controller
         return view('products/index', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
+        if (Gate::denies('author-panel')) {
+            return redirect(route('products.index'));
+        }
+        if (Gate::denies('author-panel')) {
+            return redirect(route('products.index'));
+        }
         return view('products/create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+        if (Gate::denies('author-panel')) {
+            return redirect(route('products.index'));
+        }
         $data = request()->validate([
             'name' => 'required',
             'price' => 'required',
@@ -64,37 +58,24 @@ class ProductsController extends Controller
         return redirect('/products/index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function show(Product $product)
     {
         return view('products/show', compact('product'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Product $product)
     {
+        if (Gate::denies('author-panel')) {
+            return redirect(route('products.index'));
+        }
         return view('products/edit',compact('product'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Product $product)
     {
+        if (Gate::denies('author-panel')) {
+            return redirect(route('products.index'));
+        }
         $data = request()->validate([
             'name' => 'required',
             'price' => 'required',
@@ -110,17 +91,34 @@ class ProductsController extends Controller
         return redirect('/products/index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Product $product)
     {
+        if (Gate::denies('author-panel')) {
+            return redirect(route('products.index'));
+        }
         $product->delete();
         return redirect('/products/index');
     }
 
-    
+    public function indexall()
+    {
+        if (Gate::denies('author-panel')) {
+            return redirect(route('products.index'));
+        }
+        $products = Product::all();
+        $products = $products->toJson();
+        return view('/products/indexall', compact('products'));
+    }
+
+    public function update_status(Request $request, Product $product)
+    {
+        if (Gate::denies('author-panel')) {
+            return redirect(route('products.index'));
+        }
+        $data = request()->validate([
+            'available' => 'required',
+        ]);
+        $product->update($data);
+        return redirect('/products');
+    }
 }

@@ -23,13 +23,6 @@ class UsersController extends Controller
         return view('/admin/users/index', compact('users'));
     }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function edit(User $user)
     {
         if (Gate::denies('users-panel')) {
@@ -42,23 +35,20 @@ class UsersController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, User $user)
     {
         if (Gate::denies('users-panel')) {
             return redirect(route('products.index'));
         }
         $user->roles()->sync($request->roles);
+        $data = request()->validate([
+            'name' => 'required',
+            'email' => 'email'
+        ]);
+        $user->update($data);
         return redirect(route('users.index'));
     }
 
-   
     public function destroy(User $user)
     {
         if (Gate::denies('users-panel')) {
@@ -68,6 +58,5 @@ class UsersController extends Controller
         $user->delete();
         return redirect(route('users.index'));
     }
-
 
 }

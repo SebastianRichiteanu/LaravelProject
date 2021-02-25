@@ -44,7 +44,7 @@
         <div class="form-group row">
             <label for="available" class="col-md-4 col-form-label text-md-right">Available</label>
             <div class="col-md-6">
-                <select id="available" name="available" class="form-control @error('available') is-invalid @enderror" value="{{ old('price') ?? $product->price}}" autocomplete="available" autofocus>
+                <select id="available" name="available" class="form-control @error('available') is-invalid @enderror" value="{{ old('available') ?? $product->available}}" autocomplete="available" autofocus>
                     <option value="true">True</option>
                     <option value="false">False</option>
                 </select>

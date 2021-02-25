@@ -19,7 +19,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/products/index', [App\Http\Controllers\ProductsController::class, 'index'])->name('products.index');
 
@@ -32,5 +31,8 @@ Route::get('/products/{product}/edit', [App\Http\Controllers\ProductsController:
 Route::patch('/products/{product}', [App\Http\Controllers\ProductsController::class, 'update'])->name('products.update');
 
 Route::delete('/products/{product}', [App\Http\Controllers\ProductsController::class, 'destroy'])->name('products.destroy');
+
+Route::get('/products', [App\Http\Controllers\ProductsController::class, 'indexall'])->name('products.indexall');
+Route::patch('/{product}', [App\Http\Controllers\ProductsController::class, 'update_status'])->name('products.update');
 
 Route::resource('/admin/users', App\Http\Controllers\Admin\UsersController::class,['except' => ['show','create','store']]);

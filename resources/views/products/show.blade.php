@@ -13,18 +13,20 @@
             </div>
         </div>
         <div class="half">
-            <div class="btn_admin">
-                <div>
-                    <a href="{{ url('/products/' . $product->id) . '/edit' }}" class="btn btn-primary" > Edit Product </a>
-                </div>
-                <form action="/products/{{$product->id}}" enctype="multipart/form-data" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <div class="row">
-                        <button class="btn btn-primary">Delete Product</button>
+            @can('author-panel')
+                <div class="btn_admin">
+                    <div>
+                        <a href="{{ url('/products/' . $product->id) . '/edit' }}" class="btn btn-primary" > Edit Product </a>
                     </div>
-                </form>
-            </div>
+                    <form action="/products/{{$product->id}}" enctype="multipart/form-data" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <div class="row">
+                            <button class="btn btn-primary">Delete Product</button>
+                        </div>
+                    </form>
+                </div>
+            @endcan
             <div class="description">
                 <p>{{$product->description}}</p>
             </div>
