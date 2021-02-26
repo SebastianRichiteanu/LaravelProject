@@ -25,7 +25,7 @@ ___Objective reasons:___
 - It helps create fast web applications
 - The server-client authentication system is fast
 - Software testing can be automated
-- Routing and caching activities are faster
+- Routing and caching activities are faste
 - The critical security threats & vulnerabilities can be fixed easily
 
 ## Project Description
@@ -60,7 +60,7 @@ A REST API that resembles an online shop which offer details about a product ent
     // changed DB settings in .env
 ```
 - Migrated DB
-- For the next steps,you can find all the things you need in the [commits section]
+- For the next steps, you can find all the things in the [commits section]
 
 ## Mentions
 
@@ -84,7 +84,7 @@ __QuickStart:__
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
 
-   [Composer]: <https://laravel.com/docs/4.2#install-composer>
+   [Composer]: <https://getcomposer.org/>
    [node]: <https://nodejs.org>
    [npm]: <https://www.npmjs.com>
    [commits section]: <https://github.com/SebastianRichiteanu/LaravelProject/commits/main>
