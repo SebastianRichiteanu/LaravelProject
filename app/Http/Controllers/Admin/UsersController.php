@@ -10,10 +10,7 @@ use Gate;
 
 class UsersController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(middleware:'auth');
-    }
+    
     public function index()
     {
         if (Gate::denies('users-panel')) {
@@ -43,7 +40,7 @@ class UsersController extends Controller
         $user->roles()->sync($request->roles);
         $data = request()->validate([
             'name' => 'required',
-            'email' => 'email'
+            'email' => 'email','required',
         ]);
         $user->update($data);
         return redirect(route('users.index'));

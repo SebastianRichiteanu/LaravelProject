@@ -3,7 +3,7 @@
 
 <div class="container">
     <div class="row pb-5">
-        <img src="https://seocustomer.com/wp-content/uploads/2020/05/Top-5-Push-Notifications-Templates-For-Ecommerce-Website-banner.jpg">
+        <img id="banner" src="https://seocustomer.com/wp-content/uploads/2020/05/Top-5-Push-Notifications-Templates-For-Ecommerce-Website-banner.jpg">
     </div>
 
 

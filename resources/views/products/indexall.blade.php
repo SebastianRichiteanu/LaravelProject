@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card table-author">
                 <div class="card-header"> 
                     Users 
                     <a href="/products/create"> <button class="float-right btn btn-info">Add New Product</button></a>
@@ -29,7 +29,7 @@
                                 <form action="/{{$product->id}}" enctype="multipart/form-data" method="post">
                                     @csrf
                                     @method('PATCH')
-                                    <select id="available" name="available" class="float-left form-control @error('available') is-invalid @enderror" value="{{ old('available') ?? $product->available}}" autocomplete="available" autofocus style="width:50%;">
+                                    <select id="available" name="available" class="float-left @error('available') is-invalid @enderror" value="{{ old('available') ?? $product->available}}" autocomplete="available" autofocus>
                                         <option value="true">True</option>
                                         <option value="false">False</option>
                                     </select>

@@ -13,11 +13,6 @@ class ProductsController extends Controller
     {
         $sort = \Request::get('sort');
         $products = Product::where('available','=','true')->get();
-        if ($sort == 1) {
-            $products = $products->sortBy('price');
-        }else if ($sort == 2) {
-            $products = $products->sortByDesc('price');
-        }
         $products = $products->toJson();
         return view('products/index', compact('products'));
     }
@@ -60,11 +55,13 @@ class ProductsController extends Controller
 
     public function show(Product $product)
     {
+        $product = $product->toJson();
         return view('products/show', compact('product'));
     }
 
     public function edit(Product $product)
     {
+        $product = $product->toJson();
         if (Gate::denies('author-panel')) {
             return redirect(route('products.index'));
         }
@@ -80,8 +77,7 @@ class ProductsController extends Controller
             'name' => 'required',
             'price' => 'required',
             'description' => 'required',
-            'image' => '',
-            'available' => 'required',
+            'image' => 'image',
         ]);
         if (array_key_exists('image',$data)) {
             $imgPath = request('image')->store('uploads', 'public');
