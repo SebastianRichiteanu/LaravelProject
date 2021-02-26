@@ -25,7 +25,7 @@ ___Objective reasons:___
 - It helps create fast web applications
 - The server-client authentication system is fast
 - Software testing can be automated
-- Routing and caching activities are faste
+- Routing and caching activities are fast
 - The critical security threats & vulnerabilities can be fixed easily
 
 ## Project Description
@@ -71,7 +71,7 @@ __App Accounts:__
 | Author | author@author.com | 123456789 |
 | Admin  | admin@admin.com   | 123456789 |
 
-__Note that this app was tested on:__
+__Note that this app was created & tested on:__
 - Laravel: 4.1.1
 - Node: 14.15.5
 - NPM: 7.5.6
