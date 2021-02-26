@@ -56,6 +56,7 @@ window.sort = function() {
         else
             return a<b;
     }
+
     
     var list, i, switching, b, shouldSwitch, mode;
     mode = document.getElementById("sort").value;
@@ -64,7 +65,7 @@ window.sort = function() {
     while (switching) {
         switching = false;
         b = list.getElementsByTagName("a");
-        for (i = 0; i < (b.length - 1); i++) {
+        for (i = 0; i < (b.length - 1); ++i) {
             shouldSwitch = false;
             bi = b[i].getElementsByClassName("product-description")[0].children[0].innerText;
             bi = Number(bi.substring(0,bi.lastIndexOf("$")))
@@ -75,9 +76,9 @@ window.sort = function() {
             break;
             }
         }
-    if (shouldSwitch) {
-        b[i].parentNode.insertBefore(b[i + 1], b[i]);
-        switching = true;
-    }
+        if (shouldSwitch) {
+            b[i].parentNode.insertBefore(b[i + 1], b[i]);
+            switching = true;
+        }
     }
 }

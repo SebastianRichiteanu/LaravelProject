@@ -28,7 +28,7 @@ class UsersController extends Controller
         $roles = Role::all();
         return view('/admin/users/edit',[
             'user' => $user,
-            'roles' => $roles
+            'roles' => $roles,
         ]);
     }
 
@@ -40,7 +40,7 @@ class UsersController extends Controller
         $user->roles()->sync($request->roles);
         $data = request()->validate([
             'name' => 'required',
-            'email' => 'email','required',
+            'email' => 'required',
         ]);
         $user->update($data);
         return redirect(route('users.index'));

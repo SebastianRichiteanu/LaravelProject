@@ -1937,7 +1937,7 @@ window.sort = function () {
     switching = false;
     b = list.getElementsByTagName("a");
 
-    for (i = 0; i < b.length - 1; i++) {
+    for (i = 0; i < b.length - 1; ++i) {
       shouldSwitch = false;
       bi = b[i].getElementsByClassName("product-description")[0].children[0].innerText;
       bi = Number(bi.substring(0, bi.lastIndexOf("$")));

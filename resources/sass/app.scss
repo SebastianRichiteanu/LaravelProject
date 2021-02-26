@@ -113,6 +113,7 @@
 .product-name {
     font-size: xxx-large;
     text-align: center;
+    line-height: 1.2;
 }
 
 
@@ -185,13 +186,16 @@
         }
         
         .image{
-        padding-top: 15px;
-        width: 100%;
-        
+            padding-top: 15px;
+            width: 100%;
+            
             img{
                 display: block;
                 max-width: 100%;
                 height: auto;
+                @media screen and (min-width:1200px) {
+                    width:600px;
+                }
             }
         }
         
@@ -308,6 +312,10 @@
 
 }
 
+.author-panel-name {
+    float: left !important;
+}
+
 .table-author {
     @media screen and (max-width:300px) {
         font-size: 11px;           
@@ -315,8 +323,20 @@
     @media screen and (min-width:300px) and (max-width: 400px) {
         font-size: 10px;   
     }
-
+    
     a {
+        float: right;
+        margin: 2px;
+        @media screen and (max-width:300px) {
+            float: none;
+            padding: 2px;
+            font-size: 10px;           
+        }
+        @media screen and (max-width:400px) {
+            float: none;
+            padding: 2px;
+            font-size: 11px;           
+        }
         button {
             @media screen and (max-width:300px) {
                 font-size: 10px;
@@ -375,3 +395,4 @@
 
 
 }
+

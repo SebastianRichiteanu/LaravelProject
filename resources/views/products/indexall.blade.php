@@ -23,17 +23,19 @@
                         @foreach(json_decode($products) as $product)
                             <tr>
                             <th scope="row">{{$product->id}}</th>
-                            <td>{{$product->name}}</td>
+                            <td>
+                                <a class="author-panel-name" href="{{ url('/products/' . $product->id)}}" > {{$product->name}} </a>
+                            </td>
                             <td>{{$product->available}}</td>
                             <td>
                                 <form action="/{{$product->id}}" enctype="multipart/form-data" method="post">
                                     @csrf
                                     @method('PATCH')
-                                    <select id="available" name="available" class="float-left @error('available') is-invalid @enderror" value="{{ old('available') ?? $product->available}}" autocomplete="available" autofocus>
+                                    <select id="available" name="available" class="float-left @error('available') is-invalid @enderror" autocomplete="available" autofocus>
                                         <option value="true">True</option>
                                         <option value="false">False</option>
                                     </select>
-                                    <button type="submit" class="float-right btn btn-success float-left">Edit Status</button>
+                                    <button type="submit" class="float-right btn btn-success float-left">Status</button>
                                 </form>
                             </td>
                             </tr>
