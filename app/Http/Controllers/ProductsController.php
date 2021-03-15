@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Gate;
@@ -13,8 +14,12 @@ class ProductsController extends Controller
     {
         $sort = \Request::get('sort');
         $products = Product::where('available','=','true')->get();
-        $products = $products->toJson();
-        return view('products/index', compact('products'));
+        $categories = Category::all();
+        //$products = $products->toJson();        
+        return view('products/index',[
+            'products' => $products,
+            'categories' => $categories,
+        ]);
     }
 
     public function create()
@@ -22,10 +27,8 @@ class ProductsController extends Controller
         if (Gate::denies('author-panel')) {
             return redirect(route('products.index'));
         }
-        if (Gate::denies('author-panel')) {
-            return redirect(route('products.index'));
-        }
-        return view('products/create');
+        $categories = Category::all();
+        return view('products/create',['categories' => $categories]);
     }
 
     public function store(Request $request)
@@ -33,6 +36,7 @@ class ProductsController extends Controller
         if (Gate::denies('author-panel')) {
             return redirect(route('products.index'));
         }
+        
         $data = request()->validate([
             'name' => 'required',
             'price' => 'required',
@@ -42,14 +46,14 @@ class ProductsController extends Controller
         ]);
         $imgPath = request('image')->store('uploads', 'public');
 
-        Product::create([
+        $product = Product::create([
             'name' => $data['name'],
             'price' => $data['price'],
             'description' => $data['description'],
             'image' => $imgPath,
             'available' => $data['available'],
         ]);
-
+        $product->categories()->sync($request->categories);
         return redirect('/products/index');
     }
 
@@ -61,11 +65,16 @@ class ProductsController extends Controller
 
     public function edit(Product $product)
     {
-        $product = $product->toJson();
+
+        $categories = Category::all();        
+
         if (Gate::denies('author-panel')) {
             return redirect(route('products.index'));
         }
-        return view('products/edit',compact('product'));
+        return view('products/edit',[
+            'product' => $product,
+            'categories' => $categories,
+        ]);
     }
 
     public function update(Request $request, Product $product)
@@ -73,6 +82,7 @@ class ProductsController extends Controller
         if (Gate::denies('author-panel')) {
             return redirect(route('products.index'));
         }
+        $product->categories()->sync($request->categories);
         $data = request()->validate([
             'name' => 'required',
             'price' => 'required',
@@ -85,6 +95,9 @@ class ProductsController extends Controller
         }
         $product->update($data);
         return redirect('/products/index');
+
+
+
     }
 
     public function destroy(Product $product)
@@ -92,6 +105,7 @@ class ProductsController extends Controller
         if (Gate::denies('author-panel')) {
             return redirect(route('products.index'));
         }
+        $product->categories()->detach();
         $product->delete();
         return redirect('/products/index');
     }

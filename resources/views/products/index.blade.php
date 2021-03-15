@@ -9,7 +9,16 @@
 
     <div class="src_sort">
         <input type="text" id="src_bar" onkeyup="window.search()" placeholder="Search..">
-        <p>
+        <a id = "p_category">
+            Categories:
+            <select name="category" id="category" onchange="window.category()">
+                <option value="All">All</option>
+                @foreach ($categories as $category) 
+                    <option value="{{$category->name}}">{{$category->name}}</option>
+                @endforeach
+            </select>
+        </a>
+        <p id="p_sort">
             Sort by Price:
             <select name="sort" id="sort" onchange="window.sort()"> 
                 <option value="0">Default</option>
@@ -25,7 +34,7 @@
     <br>
     
     <ul class="products" id="products">
-        @foreach (json_decode($products) as $product)
+        @foreach ($products as $product)
             <a href="{{ url('/products/' . $product->id) }}" class="product panel">
                 <div class="product-photo">
                     <div class="photo-container">
@@ -41,6 +50,8 @@
                 <ul class="product-description">
                     <li>{{$product->price}}$</li>
                     <li>{{$product->description}}</li>
+                    <li>{{implode(', ', $product->categories()->get()->pluck('name')->toArray())}}</li>
+                    <!-- style="visibility: hidden;" -->
                 </ul>
                 </div>
             </a>

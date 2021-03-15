@@ -49,6 +49,23 @@ window.search = function() {
     }
 }
 
+window.category = function() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('category');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("products");
+    li = ul.getElementsByTagName("a");
+    for (i = 0; i < li.length; ++i) {
+        a = li[i].getElementsByClassName("product-description")[0].children[2];
+        txtValue = a.textContent || a.innerText;
+        if (filter.toUpperCase() == "ALL" || txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
 window.sort = function() {
     function comp(a,b,mode) {
         if (mode == 1) 
@@ -82,3 +99,4 @@ window.sort = function() {
         }
     }
 }
+

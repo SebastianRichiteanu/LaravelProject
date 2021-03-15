@@ -11239,6 +11239,10 @@ a.text-dark:focus {
   float: right;
 }
 
+.src_sort a {
+  padding: 13%;
+}
+
 @media screen and (min-width: 820px) and (max-width: 1200px) {
   .navbar a {
     font-size: xx-large;

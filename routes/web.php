@@ -26,3 +26,14 @@ Route::get('/products', [App\Http\Controllers\ProductsController::class, 'indexa
 Route::patch('/{product}', [App\Http\Controllers\ProductsController::class, 'update_status'])->name('products.update');
 // routes for admin
 Route::resource('/admin/users', App\Http\Controllers\Admin\UsersController::class,['except' => ['show','create','store']]);
+
+
+Route::get('/categories/index', [App\Http\Controllers\CategoriesController::class, 'index'])->name('categories.index');
+
+Route::get('/categories/create', [App\Http\Controllers\CategoriesController::class, 'create'])->name('categories.create');
+Route::post('/categories', [App\Http\Controllers\CategoriesController::class, 'store'])->name('categories.store');
+
+Route::get('/categories/{category}/edit', [App\Http\Controllers\CategoriesController::class, 'edit'])->name('categories.edit');
+Route::patch('/categories/{category}', [App\Http\Controllers\CategoriesController::class, 'update'])->name('categories.update');
+
+Route::delete('/categories/{category}', [App\Http\Controllers\CategoriesController::class, 'destroy'])->name('categories.destroy');

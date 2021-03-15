@@ -51,7 +51,18 @@
                 @enderror
             </div>
         </div>
-        
+        <div class="form-group row">
+            <label for="categories" class="col-md-3 col-form-label text-md-right">Categories</label>
+                <div class="col-md-6">
+                    @foreach($categories as $category)
+                        <div class="form-check">
+                            <input type="checkbox" name="categories[]" value="{{$category->id}}"
+                            @if($product->categories->pluck('id')->contains($category->id)) checked @endif >
+                            <label>{{$category->name}}</label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         <div class="row">
             <button class="btn btn-primary">Edit Product</button>
         </div>
