@@ -34,10 +34,12 @@ A REST API that resembles an online shop which offer details about a product ent
 
 ## Features
 
-- Products (Name, Description, Price, Image, Available)
+- Products (Name, Description, Price, Image, Available, Rating)
 - Products CRUD
 - User authentication system (CRUD)
 - User roles (user, author, admin)
+- Categories (+ CRUD)
+- Reviews for products
 
 ## How I worked with it?
 
