@@ -15,11 +15,14 @@ class Product extends Model
         'price',
         'available',
         'image',
+        'rating',
     ];
 
     public function categories() {
         return $this->belongsToMany('App\Models\Category');
     }
 
-   
+    public function reviews() {
+        return $this->belongsToMany('\App\Models\Review');
+    }
 }

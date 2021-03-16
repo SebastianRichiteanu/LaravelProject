@@ -36,4 +36,8 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function reviews() {
+        return $this->belongsToMany('\App\Models\Review');
+    }
 }

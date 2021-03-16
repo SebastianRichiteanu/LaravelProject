@@ -37,3 +37,7 @@ Route::get('/categories/{category}/edit', [App\Http\Controllers\CategoriesContro
 Route::patch('/categories/{category}', [App\Http\Controllers\CategoriesController::class, 'update'])->name('categories.update');
 
 Route::delete('/categories/{category}', [App\Http\Controllers\CategoriesController::class, 'destroy'])->name('categories.destroy');
+
+Route::post('/reviews', [App\Http\Controllers\ReviewsController::class, 'store'])->name('review.store');
+
+Route::delete('/reviews/{review}', [App\Http\Controllers\ReviewsController::class, 'destroy'])->name('review.destroy');

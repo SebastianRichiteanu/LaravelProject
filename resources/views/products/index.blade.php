@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<link rel="stylesheet" href="https://unpkg.com/@coreui/icons@2.0.0-beta.3/css/free.min.css">
 
 <div class="container">
     <div class="row pb-5">
@@ -32,7 +33,6 @@
     <br>
     <br>
     <br>
-    
     <ul class="products" id="products">
         @foreach ($products as $product)
             <a href="{{ url('/products/' . $product->id) }}" class="product panel">
@@ -50,8 +50,19 @@
                 <ul class="product-description">
                     <li>{{$product->price}}$</li>
                     <li>{{$product->description}}</li>
-                    <li>{{implode(', ', $product->categories()->get()->pluck('name')->toArray())}}</li>
-                    <!-- style="visibility: hidden;" -->
+                    <li>Categories: {{implode(', ', $product->categories()->get()->pluck('name')->toArray())}}</li>
+                    <li> 
+                        Rating:
+                        @if ($product->rating == null)
+                            No ratings yet!
+                        @else
+                            @for ($i = 1; $i <= $product->rating; $i++) 
+                                <i class="cil-star"></i>
+                            @endfor
+                            @if ($product->rating - floor($product->rating) >= 0.5)
+                                <i class="cil-star-half"></i>
+                            @endif
+                        @endif
                 </ul>
                 </div>
             </a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Gate;
 
@@ -59,8 +60,9 @@ class ProductsController extends Controller
 
     public function show(Product $product)
     {
+        $reviews = Review::where('product_id','=',$product->id)->get();
         $product = $product->toJson();
-        return view('products/show', compact('product'));
+        return view('products/show', compact('product','reviews'));
     }
 
     public function edit(Product $product)
@@ -95,9 +97,6 @@ class ProductsController extends Controller
         }
         $product->update($data);
         return redirect('/products/index');
-
-
-
     }
 
     public function destroy(Product $product)
@@ -130,6 +129,17 @@ class ProductsController extends Controller
         ]);
         $product->update($data);
         return redirect('/products');
+    }
+
+    public function update_rating(Product $product) {
+        $reviews = Review::where('product_id',$product->id)->get();
+        $sum = 0;
+        foreach ($reviews as $review) {
+            $sum += $review->review;
+        }
+        $sum = $sum / count($reviews);
+        $data = ['rating' => $sum,];
+        $product->update($data);
     }
 }
 

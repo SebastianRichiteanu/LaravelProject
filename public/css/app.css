@@ -11070,6 +11070,11 @@ a.text-dark:focus {
   line-height: 1.2;
 }
 
+.product-description li:nth-child(n+3) {
+  font-weight: bold;
+  padding-left: 20%;
+}
+
 .card {
   transition: 200ms;
   background: #fff;
@@ -11240,7 +11245,8 @@ a.text-dark:focus {
 }
 
 .src_sort a {
-  padding: 13%;
+  padding: 10%;
+  font-size: large;
 }
 
 @media screen and (min-width: 820px) and (max-width: 1200px) {
@@ -11393,6 +11399,47 @@ a.text-dark:focus {
     padding: 4px;
     width: 100%;
   }
+}
+
+.reviews_panel {
+  padding: 15px;
+}
+
+.reviews_panel .reviews {
+  width: 40%;
+  float: left;
+}
+
+.reviews_panel .new {
+  width: 40%;
+  float: right;
+  display: flex;
+}
+
+.glyphicon-star {
+  font-size: 20px;
+  color: #e67e22;
+}
+
+.glyphicon-star.half {
+  position: relative;
+}
+
+.glyphicon-star.half:before {
+  position: relative;
+  z-index: 9;
+  width: 47%;
+  display: block;
+  overflow: hidden;
+}
+
+.glyphicon-star.half:after {
+  content: "";
+  position: absolute;
+  z-index: 8;
+  color: #bdc3c7;
+  top: 0;
+  left: 0;
 }
 
 

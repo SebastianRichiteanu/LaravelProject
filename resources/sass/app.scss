@@ -116,6 +116,10 @@
     line-height: 1.2;
 }
 
+.product-description li:nth-child(n+3) {
+    font-weight: bold;
+    padding-left:20%;
+}
 
 
 .card{
@@ -202,6 +206,7 @@
         .description{
             margin-bottom: 25px;
             margin-top: 50px;
+            
             p{
                 margin: 0;
                 font-family: "Open Sans", sans-serif;
@@ -213,6 +218,8 @@
                     font-size: xx-large;
                 }
             }
+
+            
         }
 
         .btn_admin {
@@ -262,7 +269,8 @@
         float:right;
     }
     a {
-        padding: 13%;
+        padding: 10%;
+        font-size:large;
     }
 }
 
@@ -399,3 +407,42 @@
 
 }
 
+.reviews_panel{
+    padding:15px;
+
+    .reviews {
+        width:40%;
+        float:left;
+    }
+
+    .new {
+        width:40%;
+        float:right;
+        display:flex;
+    }
+
+
+}
+
+.glyphicon-star {
+    font-size: 20px;
+    color: #e67e22;
+    &.half {
+      position: relative;
+      &:before {
+        position: relative;
+        z-index: 9;
+        width: 47%;
+        display: block;
+        overflow: hidden;
+      }
+      &:after {
+        content: '\e006';
+        position: absolute;
+        z-index: 8;
+        color: #bdc3c7;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
